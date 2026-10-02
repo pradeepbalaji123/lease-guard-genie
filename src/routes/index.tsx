@@ -277,7 +277,9 @@ function ReportView({ r }: { r: Report }) {
   const [copied, setCopied] = useState(false);
   const email = `Subject: ${r.negotiation_email?.subject ?? ""}\n\n${r.negotiation_email?.body ?? ""}`;
   const ref = useRef<HTMLElement>(null);
-  useEffect(() => ref.current?.scrollIntoView({ behavior: "smooth", block: "start" }), []);
+  useEffect(() => {
+    ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
   return (
     <section ref={ref} className="space-y-6 rounded-xl border bg-card p-6">
       <div className="flex flex-col items-center gap-6 md:flex-row">
