@@ -294,7 +294,7 @@ function ReportView({ r }: { r: Report }) {
           {(r.red_flags ?? []).slice(0, 5).map((f, i) => (
             <div key={i} className="rounded-lg border p-3">
               <div className="flex items-center gap-2">
-                <span className={`rounded px-2 py-0.5 text-[11px] font-bold uppercase ${SEV[f.severity?.toLowerCase()] ?? SEV.medium}`}>{f.severity}</span>
+                <span className={`rounded px-2 py-0.5 text-[11px] font-bold uppercase ${SEV[f.severity?.toLowerCase()] ?? SEV['medium']}`}>{f.severity}</span>
                 <span className="text-sm font-semibold">{f.title}</span>
               </div>
               {f.clause && <p className="mt-1 text-xs text-muted-foreground">Clause: {f.clause}</p>}

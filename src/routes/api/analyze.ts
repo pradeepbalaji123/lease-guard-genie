@@ -26,7 +26,7 @@ export const Route = createFileRoute("/api/analyze")({
         const parsed = Body.safeParse(await request.json().catch(() => null));
         if (!parsed.success)
           return Response.json({ error: "Please paste a lease of at least 50 characters." }, { status: 400 });
-        const apiKey = process.env.LOVABLE_API_KEY;
+        const apiKey = process.env['LOVABLE_API_KEY'];
         if (!apiKey) return Response.json({ error: "AI service not configured." }, { status: 500 });
         const lease = parsed.data.lease;
         const run = createAgentRunner(apiKey, request.signal);
@@ -55,7 +55,7 @@ export const Route = createFileRoute("/api/analyze")({
             };
             try {
               const plan = await stage("orchestrator", PROMPTS.orchestrator, `LEASE:\n${lease}`);
-              const ca = (plan.clause_assignments ?? {}) as Record<string, unknown>;
+              const ca = (plan['clause_assignments'] ?? {}) as Record<string, unknown>;
               const mk = (k: string) =>
                 `Assigned clauses:\n${JSON.stringify(ca[k] ?? [])}\n\nFULL LEASE:\n${lease}`;
               const [legal, financial, rights] = await Promise.all([
